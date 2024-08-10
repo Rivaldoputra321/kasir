@@ -2,12 +2,12 @@
 @extends ('dashboard.body')
 
 @section('main')
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-                        <h2>Welcome <span>{{Auth::user()->name}}!</span></h2>
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
-                    </div>
+                    <h1>Dashboard {{Auth::user()->role}}</h1>
+                        <p>Welcome, {{Auth::user()->name}}</p>
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button type="submit">Logout</button>
+                        </form>
 
                     <!-- Content Row -->
                     <div class="row">

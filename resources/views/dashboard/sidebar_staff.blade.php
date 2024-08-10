@@ -38,12 +38,6 @@
 </li>
 
 <!-- Nav Item - Utilities Collapse Menu -->
-<li class="nav-item">
-    <a class="nav-link collapsed" href="dashboard_staff">
-        <i class="fas fa-fw fa-wrench"></i>
-        <span>Staff</span>
-    </a>
-</li>
 
 <li class="nav-item">
     <a class="nav-link collapsed" href="dashboard_product">

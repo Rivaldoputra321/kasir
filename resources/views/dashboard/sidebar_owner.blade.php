@@ -46,6 +46,13 @@
 </li>
 
 <li class="nav-item">
+    <a class="nav-link collapsed" href="dashboard_member">
+        <i class="fas fa-fw fa-wrench"></i>
+        <span>Admin</span>
+    </a>
+</li>
+
+<li class="nav-item">
     <a class="nav-link collapsed" href="dashboard_product">
         <i class="fas fa-fw fa-wrench"></i>
         <span>Product</span>

@@ -29,46 +29,41 @@
                                 <img src="{{ asset('img/kasir.jpeg') }}" alt="">
                             </div>
                             <div class="col-lg-6">
-                                <form action="" method="POST">
+                                <form action="{{ route('loginowner') }}" method="POST">
                                     @csrf
-                                    <h2 class="text-center mt-4">Register Admin</h2>
+                                    <h2 class="text-center mt-4">Login Owner</h2>
                                     <div class="p-5">
-                                        <div class="form-group">
-                                            <input type="text" name="name" class="form-control" placeholder="Username" required value="{{ old('name') }}" autofocus>
-                                            <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-                                            @error('name')
-                                                <span class = "text-danger danger" >{{ $message }}</span>
-                                            @enderror
+                                        
+                                    @if (session('success'))
+                                        <div>
+                                            <p class="sucsess">{{ session('success') }}</p>
                                         </div>
+                                    @endif
 
-                                        <div class="form-group">
+                                    @if(Session::has('error'))
+                                        <p id="flash-message" class="alert alert-danger alert-dismissible fade show" role="alert">
+                                            {{ Session::get('error') }}
+                                        </p>
+                                    @endif
+                                        <div class="form-group mb-4">
+                                            
                                             <input type="email" name="email" class="form-control" placeholder="Email" required value="{{ old('email') }}" autofocus>
                                             <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-                                            @error('email')
-                                                <span class = "text-danger danger" >{{ $message }}</span>
-                                            @enderror
                                         </div>
-                                        
-                                        <div class="form-group">
+                                        <div class="form-group mb-4">
                                             <div class="input-group">
-                                                <input name="password" id="password" type="password" class="form-control " placeholder="Password" value="" required>
+                                                <input name="password" id="password" type="password" class="form-control " placeholder="Password" value="{{ old('password') }}" required>
                                                 <div class="input-group-append">
                                                     <span class="input-group-text" id="toggle-password" style="cursor: pointer;">
                                                         <i class="bi bi-eye-fill" id="toggle-icon"></i>
                                                     </span>
                                                 </div>
                                             </div>
-                                            
                                         </div>
-                                        
-                                        <button type="submit" class="btn btn-block btn-primary">Register</button>
+                                        <button type="submit" class="btn btn-block btn-primary mb-4">Log In</button>
                                         
                                 </form>
-                            
-                                
-                                <div class="text-center">
-                                    <a class="small" href="login">Alredy Have Acount? Login</a>
-                                </div>
+
                             </div>
                         </div>
                     </div>

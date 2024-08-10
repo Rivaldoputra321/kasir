@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('alamat');
-            $table->integer('no-telp');
+            $table->bigInteger('no_telp');
             $table->timestamps();
         });
     }
