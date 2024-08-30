@@ -31,7 +31,7 @@
                             <div class="col-lg-6">
                                 <form action="" method="POST">
                                     @csrf
-                                    <h2 class="text-center mt-4">Register Admin</h2>
+                                    <h2 class="-center mt-4">Register Admin</h2>
                                     <div class="p-5">
                                         <div class="form-group">
                                             <input type="text" name="name" class="form-control" placeholder="Username" required value="{{ old('name') }}" autofocus>

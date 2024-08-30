@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
+            $table->string('kd_member')->unique();
             $table->string('name');
             $table->string('alamat');
             $table->bigInteger('no_telp');

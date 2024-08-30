@@ -3,8 +3,11 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BeginController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\DashboardAdminController;
 use App\Http\Controllers\DashboardStaffController;
 use App\Http\Controllers\DashboardMemberController;
 use App\Http\Controllers\DashboardProductController;
@@ -63,9 +66,17 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('/dashboard_staff', DashboardStaffController::class);
         Route::resource('/dashboard_member', DashboardMemberController::class);
         Route::resource('/dashboard_product', DashboardProductController::class);
+        Route::resource('/dashboard_admin', DashboardAdminController::class);
+        Route::get('/dashboard_inactive', [DashboardAdminController::class, 'inactive'])->name('dashboard_inactive');
+        Route::post('/dashboard_inactive/{id}/activate', [DashboardAdminController::class, 'activate'])->name('dashboard_inactive.activate');
+        // routes/web.php
+Route::get('/transaksi', [TransactionController::class, 'index']);
+Route::post('/transaksi', [TransactionController::class, 'processTransaction']);
+
+
+
 
 });
-
 
 
 

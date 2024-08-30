@@ -2,20 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use Log;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
 class DashboardProductController extends Controller
 {
-    public function index()
-    {
-        $categories = Category::all();
-        return view('dashboard.dashboard_product.dashboard_product_index', [
-            'products' => Product::all(),'categories' => $categories
-        ]);
-
+    public function index(Request $request)
+{
+    // Jika permintaan adalah AJAX, kembalikan JSON data
+    if ($request->ajax()) {
+        $products = Product::with('categories')->get();
+        return response()->json($products);
     }
+
+    // Jika bukan permintaan AJAX, kembalikan view dengan data produk
+    $categories = Category::all();
+    return view('dashboard.dashboard_product.dashboard_product_index', [
+        'products' => Product::all(),
+        'categories' => $categories
+    ]);
+}
+
 
     public function create()
     {
@@ -26,18 +35,32 @@ class DashboardProductController extends Controller
 
     public function store(Request $request)
     {
-        
+        // Validate the request data
         $validate = $request->validate([
             'name' => 'required|string|unique:products,name',
-            'harga'=> 'required|int',
-            'stok'=> 'required|int',
-            
+            'harga' => 'required',
+            'stok' => 'required|int',
         ]);
 
-        $product = Product::create($request->all());
-        $product->categories()->sync([$request->categories]);
+        // Gather all validated data
+        $data = $request->all();
+
+        // Create a new Product instance and set the data
+        $product = new Product($data);
+
+        // Generate and set the 'kd_product' value
+        $product->kd_product = $this->generateKodeBarang();
+
+        // Save the product to the database
+        $product->save();
+
+        // Attach categories after saving the product
+        $product->categories()->attach($request->categories);
+
+        // Redirect with success message
         return redirect()->route('dashboard_product.index')->with(['success' => 'Data Berhasil Disimpan!']);
     }
+
 
     public function edit($slug)
     {
@@ -68,6 +91,13 @@ class DashboardProductController extends Controller
         return redirect()->route('dashboard_product.index')->with(['success' => 'Data Berhasil Disimpan!']);
     }
 
+    private function generateKodeBarang()
+    {
+        $lastProduct = Product::latest()->first();
+        $lastNumber = $lastProduct ? intval(substr($lastProduct->kd_product, 3)) : 0;
+        $newNumber = $lastNumber + 1;
+        return 'PRD' . str_pad($newNumber, 5, '0', STR_PAD_LEFT);
+    }
     
 
     /**

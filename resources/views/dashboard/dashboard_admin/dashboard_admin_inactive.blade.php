@@ -2,14 +2,14 @@
 @extends ('dashboard.body')
 @section('main')
                     <h1 class="h3 mb-2 text-gray-800">Tables</h1>
-                    <a href="dashboard_staff/create" class="btn btn-primary py-2">
-                                <i class="bi bi-plus"></i>
-                                Tambah Staff
+                    <a href="{{ route('dashboard_admin.index') }}" class="btn btn-outline-primary mb-3">
+                        <i class="bi bi-arrow-left"></i>
+                        Kembali
                     </a>
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">DataTables Staff</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">DataTables Admin</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -22,25 +22,20 @@
                                             <th>Action</th>
                                         </tr>
                                     </thead>
-                                    @foreach($staffs as $staff )
+                                    @foreach($inactives as $inactive )
                                     <tbody>
                                         <tr>
                                             <td>{{$loop->iteration}}</td>
-                                            <td>{{$staff->name}}</td>
-                                            <td>{{$staff->email}}</td>
+                                            <td>{{$inactive->name}}</td>
+                                            <td>{{$inactive->email}}</td>
                                             <td>
-                                                <a href="/dashboard_staff/{{ $staff->name }}/edit" class="d-block btn btn-warning w-100 mb-2">
-                                                    <i class="bi bi-pencil"></i>
-                                                    Edit
-                                                </a>
-                                                <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('dashboard_staff.destroy', $staff->id) }}" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger w-100">
-                                                    <i class="bi bi-trash"></i>
-                                                    Delete
-                                                    </button>
-                                                </form>
+                                            <form action="{{ route('dashboard_inactive.activate', $inactive->id) }}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="d-block btn btn-warning w-100 mb-2">
+                                            <i class="bi bi-pencil"></i>
+                                            Set Active
+                                        </button>
+                                    </form>
                                             </td>
                                         </tr>
                                         

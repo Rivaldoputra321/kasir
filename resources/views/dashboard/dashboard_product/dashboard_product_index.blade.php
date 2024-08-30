@@ -16,7 +16,8 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Id Product</th>
+                                            <th>No</th>
+                                            <th>Kode Product</th>
                                             <th>Name Product</th>
                                             <th>Category</th>
                                             <th>Price</th>
@@ -27,13 +28,14 @@
                                     @foreach($products as $product )
                                     <tbody>
                                         <tr>
-                                            <td>{{$product->id}}</td>
+                                            <td>{{$loop->iteration}}</td>
+                                            <td>{{$product->kd_product}}</td>
                                             <td>{{$product->name}}</td>
                                             <td>@foreach($product->categories as $category)
                                                     {{ $category->name }}
                                                 @endforeach
                                             </td>
-                                            <td>{{$product->harga}}</td>
+                                            <td>@currency($product->harga)</td>
                                             <td>{{$product->stok}}</td>
                                             <td>
                                                 <a href="/dashboard_product/{{ $product->slug }}/edit" class="d-block btn btn-warning w-100 mb-2">

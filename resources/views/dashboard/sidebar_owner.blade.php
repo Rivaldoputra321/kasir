@@ -46,7 +46,7 @@
 </li>
 
 <li class="nav-item">
-    <a class="nav-link collapsed" href="dashboard_member">
+    <a class="nav-link collapsed" href="dashboard_admin">
         <i class="fas fa-fw fa-wrench"></i>
         <span>Admin</span>
     </a>
@@ -65,6 +65,14 @@
         <span>Member</span>
     </a>
 </li>
+
+<li class="nav-item">
+    <a class="nav-link collapsed" href="transaksi">
+        <i class="fas fa-fw fa-wrench"></i>
+        <span>Transaksi</span>
+    </a>
+</li>
+
 
 
 

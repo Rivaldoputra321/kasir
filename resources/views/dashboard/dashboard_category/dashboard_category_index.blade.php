@@ -16,7 +16,7 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Id Category</th>
+                                            <th>No</th>
                                             <th>Name Category</th>
                                             <th>Action</th>
                                         </tr>
@@ -24,7 +24,7 @@
                                     @foreach($categories as $category )
                                     <tbody>
                                         <tr>
-                                            <td>{{$category->id}}</td>
+                                            <td>{{$loop->iteration}}</td>
                                             <td>{{$category->name}}</td>
                                             <td>
                                             <a href="dashboard_category/{{$category->slug}}/edit" class="d-block btn btn-warning w-100 mb-2">

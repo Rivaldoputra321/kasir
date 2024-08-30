@@ -16,7 +16,8 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Id Member</th>
+                                            <th>No</th>
+                                            <th>Kode Member</th>
                                             <th>Name</th>
                                             <th>Alamat</th>
                                             <th>No-Telpon</th>
@@ -26,7 +27,8 @@
                                     @foreach($members as $member )
                                     <tbody>
                                         <tr>
-                                            <td>{{$member->id}}</td>
+                                            <td>{{$loop->iteration}}</td>
+                                            <td>{{$member->kd_member}}</td>
                                             <td>{{$member->name}}</td>
                                             <td>{{$member->alamat}}</td>
                                             <td>{{$member->no_telp}}</td>

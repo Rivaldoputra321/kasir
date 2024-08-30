@@ -45,8 +45,7 @@
                                             {{ Session::get('error') }}
                                         </p>
                                     @endif
-                                        <div class="form-group mb-4">
-                                            
+                                        <div class="form-group mb-4"> 
                                             <input type="email" name="email" class="form-control" placeholder="Email" required value="{{ old('email') }}" autofocus>
                                             <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                                         </div>

@@ -22,17 +22,27 @@ class DashboardMemberController extends Controller
     }
 
     public function store(Request $request)
-    {
-
+{
+        // Validate the incoming request
         $validate = $request->validate([
             'name' => 'required|string|unique:customers,name',
             'alamat'=> 'required|string',
             'no_telp'=> 'required|unique:customers,no_telp',
         ]);
 
-        $member = customer::create($request->all());
+        // Get all the request data
+        $data = $request->all();
+
+        // Generate the 'kd_member' and add it to the data array
+        $data['kd_member'] = $this->generateKodeMember();
+
+        // Create a new customer using the modified data array
+        $member = customer::create($data);
+
+        // Redirect with a success message
         return redirect()->route('dashboard_member.index')->with(['success' => 'Data Berhasil Disimpan!']);
-    }
+}
+
 
     public function edit(string $name)
     {
@@ -57,7 +67,13 @@ class DashboardMemberController extends Controller
         return redirect()->route('dashboard_member.index')->with(['success' => 'Data Berhasil Disimpan!']);
     }
 
-    
+    private function generateKodeMember()
+    {
+        $lastMember = customer::latest()->first();
+        $lastNumber = $lastMember ? intval(substr($lastMember->kd_member, 3)) : 0;
+        $newNumber = $lastNumber + 1;
+        return 'MEM' . str_pad($newNumber, 5, '0', STR_PAD_LEFT);
+    }
 
     /**
      * Update the specified resource in storage.

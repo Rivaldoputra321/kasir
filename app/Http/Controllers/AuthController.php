@@ -71,7 +71,6 @@ class AuthController extends Controller
                 switch ($role){
                     case 'admin':
                         return redirect('dashboard');
-                
                 }
         }
         Auth::logout();
